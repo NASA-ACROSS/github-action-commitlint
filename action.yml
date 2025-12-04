@@ -34,4 +34,8 @@ runs:
     - name: Lint message
       shell: bash
       run: |
-        echo "${{ inputs.message }}" | npx commitlint --verbose
+        MESSAGE="${{ inputs.message }}"
+        if [ -z "$MESSAGE" ]; then
+          MESSAGE="${{ github.event.pull_request.title }}"
+        fi
+        echo "$MESSAGE" | npx commitlint --verbose
