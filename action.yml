@@ -1,0 +1,37 @@
+name: Commitlint Check
+description: Validate commit messages or PR titles with commitlint
+
+inputs:
+  message:
+    description: Message to validate (typically PR title)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Create commitlint config
+      shell: bash
+      run: |
+        echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+
+    - name: Install commitlint
+      shell: bash
+      run: npm install -D @commitlint/cli @commitlint/config-conventional conventional-changelog-atom
+
+    - name: Print versions
+      shell: bash
+      run: |
+        git --version
+        node --version
+        npm --version
+        npx commitlint --version
+
+    - name: Lint message
+      shell: bash
+      run: |
+        echo "${{ inputs.message }}" | npx commitlint --verbose
