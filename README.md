@@ -1,11 +1,11 @@
-# github-action-lint-pr-title
+# github-action-commitlint
 
 Validates commit messages on PR titles using commitlint with conventional commits standard.
 
 ## Usage
 
 ```yaml
-name: PR Title Check
+name: Commit Lint PR Title
 
 on:
   pull_request:
@@ -15,15 +15,13 @@ jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: your-org/commitlint-action@v1
-        with:
-          message: ${{ github.event.pull_request.title }}
+      - uses: ACROSS-Team/github-action-commitlint@v1
 ```
 
 ## Inputs
 | Input | Required | Description |
 |-------|----------|-------------|
-| `message` | yes | Message to validate (typically `${{ github.event.pull_request.title }}`) |
+| `message` | no | Message to validate (defaults to PR title: `${{ github.event.pull_request.title }}`) |
 
 ## Validation Rules
 Uses [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional):
