@@ -4,7 +4,7 @@ description: Validate commit messages or PR titles with commitlint
 inputs:
   message:
     description: Message to validate (typically PR title)
-    required: true
+    required: false
 
 runs:
   using: composite
