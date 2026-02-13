@@ -15,15 +15,17 @@ jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: ACROSS-Team/github-action-commitlint@v1
+      - uses: NASA-ACROSS/github-action-commitlint@v1
 ```
 
 ## Inputs
-| Input | Required | Description |
-|-------|----------|-------------|
-| `message` | no | Message to validate (defaults to PR title: `${{ github.event.pull_request.title }}`) |
+
+| Input     | Required | Description                                                                          |
+| --------- | -------- | ------------------------------------------------------------------------------------ |
+| `message` | no       | Message to validate (defaults to PR title: `${{ github.event.pull_request.title }}`) |
 
 ## Validation Rules
+
 Uses [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional):
 
 ### Valid formats:
