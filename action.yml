@@ -33,9 +33,9 @@ runs:
 
     - name: Lint message
       shell: bash
+      env:
+        INPUT_MESSAGE: ${{ inputs.message }}
+        PR_TITLE: ${{ github.event.pull_request.title }}
       run: |
-        MESSAGE='${{ inputs.message }}'
-        if [ -z "$MESSAGE" ]; then
-          MESSAGE='${{ github.event.pull_request.title }}'
-        fi
+        MESSAGE="${INPUT_MESSAGE:-$PR_TITLE}"
         echo "$MESSAGE" | npx commitlint --verbose
